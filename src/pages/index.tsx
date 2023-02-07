@@ -1,63 +1,38 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 
-import Counter from '../features/counter/Counter'
+import { useGetHomeApiQuery , getHomeApi, getRunningQueriesThunk } from '../features/home/HomeSlice'
+import { wrapper } from '../lib/store'
 import styles from '../styles/Home.module.css'
 
 const IndexPage: NextPage = () => {
+  const { data } = useGetHomeApiQuery();
+  console.log(data)
   return (
     <div className={styles.container}>
       <Head>
-        <title>Redux Toolkit</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>MedexSepeti - Medikal Artık Dijital</title>
+        <link rel="icon" href="/favicon.png" />
       </Head>
-      <header className={styles.header}>
-        <img src="/logo.svg" className={styles.logo} alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className={styles.link}
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className={styles.link}
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className={styles.link}
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className={styles.link}
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
+      
+      <section>
+        <h1>Home Page</h1>
+      
+      </section>
     </div>
   )
 }
 
 export default IndexPage
+
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) => async (context) => {
+
+    store.dispatch(getHomeApi.initiate());
+    await Promise.all(store.dispatch(getRunningQueriesThunk()));
+
+    return {
+      props: {},
+    };
+  }
+);
