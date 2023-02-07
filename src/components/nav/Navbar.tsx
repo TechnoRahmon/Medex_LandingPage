@@ -3,25 +3,21 @@ import {
   Box,
   Flex,
   IconButton,
-  Collapse,
   Stack,
   Button,
-  Text ,
   useDisclosure,
-  useColorModeValue,
-  useBreakpointValue,
   Drawer,
   DrawerContent,
-  useMediaQuery
+  useMediaQuery,
+  Image
 } from '@chakra-ui/react'
 import {
   CloseIcon,
   HamburgerIcon,
 }from '@chakra-ui/icons'
-import { MobileNav } from './Mobile/MobileNav';
 import { DesktopNav } from './Desktop/DesktopNav';
 import { SidebarContent } from './Mobile/SidebarContent';
-
+import {colors , navbar , common} from '@/styles/variables'
 
 export function Navbar() {
 
@@ -34,18 +30,17 @@ const [isSmallerThan767] = useMediaQuery('(max-width: 767px)', {
 
   const { isOpen :DrawerIsOpen, onOpen:DrawerOnOpen, onClose :DrawerOnClose, onToggle:DrawerOnToggle} = useDisclosure();
   return (
-    <Box>
+    <Box bg={colors['bs_primary']}>
       <Flex
-        bg={useColorModeValue("white", "gray.800")}
-        color={useColorModeValue("gray.600", "white")}
-        minH={"60px"}
+        width={common['w_80']}
+        mx={'auto'}
+        color={colors['bs_white']}
+        minH={navbar['min_height']}
         py={{ base: 2 }}
         px={{ base: 4 }}
-        borderBottom={1}
-        borderStyle={"solid"}
-        borderColor={useColorModeValue("gray.200", "gray.900")}
         align={"center"}
       >
+        {/*begin:: BurgerNav toggler */}
         <Flex
           flex={{ base: 1, md: "auto" }}
           ml={{ base: -2 }}
@@ -60,19 +55,19 @@ const [isSmallerThan767] = useMediaQuery('(max-width: 767px)', {
             aria-label={"Toggle Navigation"}
           />
         </Flex>
-        <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
-          <Text
-            textAlign={useBreakpointValue({ base: "center", md: "left" })}
-            fontFamily={"heading"}
-            color={useColorModeValue("gray.800", "white")}
-          >
-            Logo
-          </Text>
+        {/* end:: BurgerNav toggler */}
 
-          <Flex display={{ base: "none", md: "flex" }} ml={10}>
+        {/*begin:: logo section */}
+        <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
+          <Box width={navbar.logo.width} minH={navbar.logo.height}>
+              <Image src='/logo.svg' alt='Dan Abramov' width={'100%'} />
+          </Box>
+
+          {/* <Flex display={{ base: "none", md: "flex" }} ml={10}>
             <DesktopNav />
-          </Flex>
+          </Flex> */}
         </Flex>
+        {/*begin:: logo section */}
 
         <Stack
           flex={{ base: 1, md: 0 }}
@@ -106,9 +101,9 @@ const [isSmallerThan767] = useMediaQuery('(max-width: 767px)', {
         </Stack>
       </Flex>
 
-
+        {/* brgin :: mobile Drawer */}
         {isSmallerThan767 ? 
-                  <Drawer
+                <Drawer
                   autoFocus={false}
                   isOpen={DrawerIsOpen}
                   placement="left"
@@ -120,7 +115,7 @@ const [isSmallerThan767] = useMediaQuery('(max-width: 767px)', {
                   </DrawerContent>
               </Drawer>
         :""}
-
+        {/* end :: mobile Drawer */}
     </Box>
   );
 }
