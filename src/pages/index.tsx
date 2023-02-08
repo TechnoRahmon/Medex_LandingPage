@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 
-import { useGetHomeApiQuery , getHomeApi, getRunningQueriesThunk } from '../features/home/HomeSlice'
+import { useGetHomeApiQuery, getHomeApi, getRunningQueriesThunk } from '../features/HomeSlice'
 import { wrapper } from '../lib/store'
 import styles from '../styles/Home.module.css'
 
@@ -14,10 +14,10 @@ const IndexPage: NextPage = () => {
         <title>MedexSepeti - Medikal Artık Dijital</title>
         <link rel="icon" href="/favicon.png" />
       </Head>
-      
+    
       <section>
         <h1>Home Page</h1>
-      
+
       </section>
     </div>
   )

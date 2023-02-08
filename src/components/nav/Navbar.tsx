@@ -15,9 +15,10 @@ import {
   CloseIcon,
   HamburgerIcon,
 }from '@chakra-ui/icons'
-import { DesktopNav } from './Desktop/DesktopNav';
 import { SidebarContent } from './Mobile/SidebarContent';
 import {colors , navbar , common} from '@/styles/variables'
+import SearchInput from '../shared/Input/SearchInput';
+import NavAction from './NavAction';
 
 export function Navbar() {
 
@@ -58,47 +59,18 @@ const [isSmallerThan767] = useMediaQuery('(max-width: 767px)', {
         {/* end:: BurgerNav toggler */}
 
         {/*begin:: logo section */}
-        <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
-          <Box width={navbar.logo.width} minH={navbar.logo.height}>
-              <Image src='/logo.svg' alt='Dan Abramov' width={'100%'} />
-          </Box>
+        <Flex flex={{ base: 1 }} justify={{ base: "space-between" }}>
+            <Box width={navbar.logo.width} minH={navbar.logo.height}>
+                <Image src='/logo.svg' alt='Dan Abramov' width={'100%'} />
+            </Box>
 
-          {/* <Flex display={{ base: "none", md: "flex" }} ml={10}>
-            <DesktopNav />
-          </Flex> */}
+            <SearchInput/>
+
+            {/*start  Social Media links section */}
+            <NavAction/>
+            {/*end ::  Social Media links section */}
         </Flex>
         {/*begin:: logo section */}
-
-        <Stack
-          flex={{ base: 1, md: 0 }}
-          justify={"flex-end"}
-          direction={"row"}
-          spacing={6}
-        >
-          <Button
-            as={"a"}
-            fontSize={"sm"}
-            fontWeight={400}
-            variant={"link"}
-            href={"#"}
-          >
-            Sign In
-          </Button>
-          <Button
-            as={"a"}
-            display={{ base: "none", md: "inline-flex" }}
-            fontSize={"sm"}
-            fontWeight={600}
-            color={"white"}
-            bg={"pink.400"}
-            href={"#"}
-            _hover={{
-              bg: "pink.300",
-            }}
-          >
-            Sign Up
-          </Button>
-        </Stack>
       </Flex>
 
         {/* brgin :: mobile Drawer */}

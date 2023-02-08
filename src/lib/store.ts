@@ -1,7 +1,7 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
 import { createWrapper } from 'next-redux-wrapper'
 
-import { HomeApi } from './../features/home/HomeSlice'
+import { HomeApi } from '../features/HomeSlice'
 
 export function makeStore() {
   return configureStore({
