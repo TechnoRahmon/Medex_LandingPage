@@ -25,12 +25,12 @@ export default function SearchInput() {
                 borderRadius={'none'}
                 borderEndEndRadius={navbar.searchInput.br}
                 borderStartEndRadius={navbar.searchInput.br}
-                bg={colors.bs_main}
+                bg={'bs_main'}
                 size={'lg'}
                 border={'1px soild blue'}
                 aria-label='Search database'
                 icon={<SearchIcon />}
-                _hover={{ bg: colors.bs_sub_main }}
+                _hover={{ bg:'bs_sub_main'}}
                 _focus={{ shadow: common.focusBoxShadow }}
                 />
         </InputRightElement>

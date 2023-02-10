@@ -1,11 +1,12 @@
-import React, { FunctionComponent } from 'react'
-import { Box,  Button,  PlacementWithLogical,  Popover, PopoverContent, PopoverTrigger, ResponsiveValue, UsePopoverProps } from '@chakra-ui/react'
+import React from 'react'
+import { Box,  PlacementWithLogical,  Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverTrigger, ResponsiveValue, UsePopoverProps } from '@chakra-ui/react'
 
 type IPopoverConatinerProp = {
     popoverContentBgColor:ResponsiveValue<any>,
     showPopoverContent:boolean;
     PopoverTriggerRender:any;
     PopoverContentRender:any;
+    PopoverContentProps:any;
     trigger:UsePopoverProps['trigger'];
     placement:PlacementWithLogical;
     isOpen:boolean;
@@ -13,7 +14,7 @@ type IPopoverConatinerProp = {
     onClose:()=>void;
 }
 export default function PopoverConatiner({
-    popoverContentBgColor,
+    PopoverContentProps,
     PopoverContentRender,
     showPopoverContent,
     PopoverTriggerRender,
@@ -35,15 +36,11 @@ export default function PopoverConatiner({
         </PopoverTrigger>
 
         {showPopoverContent ?  (
-        <PopoverContent
-            border={0}
-            boxShadow={"xl"}
-            bg={popoverContentBgColor}
-            p={4}
-            rounded={"xl"}
-            minW={"sm"}
-            >
-           test
+        <PopoverContent {...PopoverContentProps}>
+            <PopoverArrow />
+            <PopoverBody>
+                <PopoverContentRender/>
+            </PopoverBody>
         </PopoverContent>
         ):''}
     </Popover>

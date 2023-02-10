@@ -14,28 +14,28 @@ import {
 import {
   CloseIcon,
   HamburgerIcon,
-}from '@chakra-ui/icons'
+} from '@chakra-ui/icons'
 import { SidebarContent } from './Mobile/SidebarContent';
-import {colors , navbar , common} from '@/styles/variables'
+import { colors, navbar, common } from '@/styles/variables'
 import SearchInput from '../shared/Input/SearchInput';
-import NavAction from './NavAction';
+import NavAction from './NavAction/NavAction';
 
 export function Navbar() {
 
-// ssr-friendly media query with fallback
-const [isSmallerThan767] = useMediaQuery('(max-width: 767px)', {
-  ssr: true,
-  fallback: false, // return false on the server, and re-evaluate on the client side
-})
+  // ssr-friendly media query with fallback
+  const [isSmallerThan767] = useMediaQuery('(max-width: 767px)', {
+    ssr: true,
+    fallback: false, // return false on the server, and re-evaluate on the client side
+  })
 
 
-  const { isOpen :DrawerIsOpen, onOpen:DrawerOnOpen, onClose :DrawerOnClose, onToggle:DrawerOnToggle} = useDisclosure();
+  const { isOpen: DrawerIsOpen, onOpen: DrawerOnOpen, onClose: DrawerOnClose, onToggle: DrawerOnToggle } = useDisclosure();
   return (
-    <Box bg={colors['bs_primary']}>
+    <Box bg={'bs_primary'}>
       <Flex
         width={common['w_80']}
         mx={'auto'}
-        color={colors['bs_white']}
+        color={'bs_white'}
         minH={navbar['min_height']}
         py={{ base: 2 }}
         px={{ base: 4 }}
@@ -60,34 +60,34 @@ const [isSmallerThan767] = useMediaQuery('(max-width: 767px)', {
 
         {/*begin:: logo section */}
         <Flex flex={{ base: 1 }} justify={{ base: "space-between" }}>
-            <Box width={navbar.logo.width} minH={navbar.logo.height}>
-                <Image src='/logo.svg' alt='Dan Abramov' width={'100%'} />
-            </Box>
+          <Box width={navbar.logo.width} minH={navbar.logo.height}>
+            <Image src='/logo.svg' alt='Dan Abramov' width={'100%'} />
+          </Box>
 
-            <SearchInput/>
+          <SearchInput />
 
-            {/*start  Social Media links section */}
-            <NavAction/>
-            {/*end ::  Social Media links section */}
+          {/*start  Social Media links section */}
+          <NavAction />
+          {/*end ::  Social Media links section */}
         </Flex>
         {/*begin:: logo section */}
       </Flex>
 
-        {/* brgin :: mobile Drawer */}
-        {isSmallerThan767 ? 
-                <Drawer
-                  autoFocus={false}
-                  isOpen={DrawerIsOpen}
-                  placement="left"
-                  onClose={DrawerOnClose}
-                  returnFocusOnClose={false}
-                  onOverlayClick={DrawerOnClose}>
-                  <DrawerContent>
-                    <SidebarContent onClose={DrawerOnClose} />
-                  </DrawerContent>
-              </Drawer>
-        :""}
-        {/* end :: mobile Drawer */}
+      {/* brgin :: mobile Drawer */}
+      {isSmallerThan767 ?
+        <Drawer
+          autoFocus={false}
+          isOpen={DrawerIsOpen}
+          placement="left"
+          onClose={DrawerOnClose}
+          returnFocusOnClose={false}
+          onOverlayClick={DrawerOnClose}>
+          <DrawerContent>
+            <SidebarContent onClose={DrawerOnClose} />
+          </DrawerContent>
+        </Drawer>
+        : ""}
+      {/* end :: mobile Drawer */}
     </Box>
   );
 }
